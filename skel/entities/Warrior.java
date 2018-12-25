@@ -8,6 +8,8 @@ public class Warrior extends Hero {
 
     public Warrior(String name) {
         this.name = name;
+        this.posx = 0;
+        this.posy = 0;
     }
     @Override
     public void attack() {

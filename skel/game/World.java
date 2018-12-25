@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import entities.Hero;
 import entities.Treasure;
@@ -17,10 +18,8 @@ public class World extends Observable {
     public static final int TREASURE_SPOT = 3;
 
     private ArrayList<Hero> party = new ArrayList<Hero>();
-    //observatorii sunt party ul
     private ArrayList<Treasure> treasures = new ArrayList<Treasure>();
     private boolean adventureStarted = false;
-    public ArrayList<Observer> obs = new ArrayList<>();
 
     private int[][] map = new int[][]
             {
@@ -54,16 +53,14 @@ public class World extends Observable {
             System.err.println("Too many treasures");
             return;
         }
-
-        //TODO place treasures randomly on the map
-
-        for (int i = 0; i < map.length; i++) {
-            for(int j = 0; j < map.length; j++) {
-                if(map[i][j] == 1) {
-                    treasures.add(new TreasureFactory().createTreasure());
-                }
-            }
+        //creates treasures
+        for (int i = 0; i < numTreasures; i++) {
+            Treasure treasure = new TreasureFactory().createTreasure();
+            treasure.setCoordinates(this);
+            treasures.add(treasure);
+            map[treasure.getPosx()][treasure.getPosy()] = TREASURE_SPOT;
         }
+
     }
 
     public void removeTreasure(Treasure t) {

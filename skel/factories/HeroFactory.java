@@ -6,9 +6,6 @@ import entities.Priest;
 import entities.Warrior;
 
 public class HeroFactory {
-    //TODO implement me
-
-
     private static HeroFactory instance = null;
 
     private HeroFactory(){

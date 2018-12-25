@@ -9,6 +9,8 @@ public class Priest extends Hero {
 
     public Priest(String name) {
         this.name = name;
+        this.posx = 0;
+        this.posy = 0;
     }
 
     @Override

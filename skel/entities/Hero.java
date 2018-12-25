@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
@@ -13,9 +14,10 @@ public abstract class Hero {
 
 	/* Hero actions */
 	public void move(Direction direction) {
+		//System.out.println(posx + " " + posy);
 
 		World world = World.getInstance();
-
+		world.getMap()[posx][posy] = world.EMPTY_SPOT;
 		switch(direction) {
 		case E:
 			posy = (posy + 1) % World.MAP_SIZE;
@@ -33,13 +35,15 @@ public abstract class Hero {
 		}
 	
 		//TODO the world must be informed in order to update its observers about this move
+		world.getMap()[posx][posy] = world.HERO_SPOT;
         world.update();
 	}
 
 	public void collect(Treasure treasure) {
-
-		//TODO
-
+		if(inventory == null) {
+			inventory = new ArrayList<>();
+		}
+		inventory.add(treasure);
 	}
 
 	public abstract void attack();
@@ -76,6 +80,14 @@ public abstract class Hero {
 	
 	public enum Type {
 		WARRIOR, MAGE, PRIEST
+	}
+
+	public List<Treasure> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(List<Treasure> inventory) {
+		this.inventory = inventory;
 	}
 
 	@Override

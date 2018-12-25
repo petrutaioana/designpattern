@@ -25,8 +25,8 @@ public class TreasureFactory {
 	"tales of this legendary item are told in each tavern"};
 
 	public Treasure createTreasure() {
-        int i = new Random().nextInt(names.length - 2);
-        int j = new Random().nextInt(lore.length - 2);
-		return new Treasure(names[i], lore[i]);
+        int i = new Random().nextInt(names.length);
+        int j = new Random().nextInt(lore.length);
+		return new Treasure(names[i], lore[j]);
 	}
 }

@@ -86,19 +86,16 @@ public class Main {
                         world.setAdventureStarted(true);
                         world.populateTreasures(5);
 
-                        //TODO Add observers to the World ??? deja e party ul
-                        //observarii sunt personajele
-                        //the usbject is the world
+                        //TODO Add observers to the World
+                        WorldPrinter printer = new WorldPrinter();
+                        TreasureDiscoverer treasure = new TreasureDiscoverer();
+                        world.addObserver(treasure);
+                        world.addObserver(printer);
+
+
                         //TODO The game state must inform its observers
-                        for (Hero hero : world.getParty()) {
-                            world.obs.add(hero);
-                        }
 
-
-                        for (Observer hero : world.obs) {
-                            if(world.hasChanged())
-                                hero.notify();
-                        }
+                        world.update();
                     }
                     break;
 
